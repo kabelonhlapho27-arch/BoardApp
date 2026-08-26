@@ -28,7 +28,7 @@ namespace BoardApp.Models
         //Override the ToString() method to return a string representation of the Board object
         public override string ToString()
         {
-            return $"Board Code: {BoardCode}, Make: {Make}, Model: {Model}, Flash Size: {FlashKb}KB, Price: {Price.ToString("C", CultureInfo.CurrentCulture)}";
+            return $"Board Code: {BoardCode}, Make: {Make}, Model: {Model}, Flash Size: {FlashKb}KB, Price: R{Price:0.00}";
         }
     }
 }
