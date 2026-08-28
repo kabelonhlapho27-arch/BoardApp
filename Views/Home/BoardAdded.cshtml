@@ -1,0 +1,17 @@
+﻿@model BoardApp.Models.Board
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Board Added</title>
+    </head>
+    <body>
+        <p>@Model.Make @Model.Model was added</p>
+
+        <p>
+            Click <a asp-action="ListBoards">here</a> to see all the boards in the repository
+        </p>
+    </body>
+</html>
