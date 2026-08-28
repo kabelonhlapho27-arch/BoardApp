@@ -1,0 +1,40 @@
+﻿@model BoardApp.Models.Board
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Add a Board</title>
+    </head>
+    <body>
+        <form asp-action="AddBoard" method="post">
+            <label asp-for="BoardCode">Board Code:</label>
+            <input asp-for="BoardCode"/>
+        </p>
+
+        <p>
+            <label asp-for="Make">Manufacturer:</label>
+            <input asp-for="Make" />    
+        </p>
+
+        <p>
+            <label asp-for="Model">Model:</label>
+            <input asp-for="Model" />
+        </p>
+
+        <p>
+            <label asp-for="FlashKb">Flash size in KB:</label>
+            <input asp-for="FlashKb" /> 
+        </p>
+
+        <p>
+            <label asp-for="Price">Price:</label>
+            <input asp-for="Price" />   
+        </p>
+        <button type="submit">Add new board</button>
+
+        </form>
+    </body>
+</html>
