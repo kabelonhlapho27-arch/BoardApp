@@ -1,3 +1,4 @@
+using AspNetCoreGeneratedDocument;
 using BoardApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -29,9 +30,22 @@ namespace BoardApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [HttpGet]
         public ViewResult AddBoard()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ViewResult AddBoard(Board board)
+        {
+            Repository.AddBoard(board);
+            return View("BoardAdded",board);
+        }
+
+        public ViewResult ListBoards()
+        {
+            return View(Repository.Boards);
         }
     }
 }
