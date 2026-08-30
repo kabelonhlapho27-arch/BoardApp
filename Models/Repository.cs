@@ -31,7 +31,32 @@ new Board("1010", "CUTfree", "CV32-BFN-01", 128, 49.00m)
 };
         }
 
+        public static Board ? GetByBoardCode(string boardCode)
+        {
+            return Repository.Boards.FirstOrDefault(b => b.BoardCode == boardCode);
+        }
 
+        public static void RemoveBoard(string boardCode)
+        {
+            var board = GetByBoardCode(boardCode);
+            if (board != null)
+            {
+                Repository.Boards.Remove();
+            }
+
+        }
+
+        public static void UpdateBoard(Board updatedBoard)
+        {
+            var existingBoard = GetByBoardCode(updatedBoard.BoardCode);
+            if(existingBoard != null)
+            {
+                existingBoard.Make = updatedBoard.Make;
+                existingBoard.Model = updatedBoard.Model;
+                existingBoard.FlashKb = updatedBoard.FlashKb;
+                existingBoard.Price = updatedBoard.Price;
+            }
+        }
     }
 }
 
