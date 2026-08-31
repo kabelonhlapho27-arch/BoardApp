@@ -3,6 +3,12 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage 
+    </div>
+}
 
 <h1>Delete</h1>
 
