@@ -1,18 +1,15 @@
-﻿using BoardApp.Models;
+using BoardApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace BoardApp.Controllers
 {
     public class BoardController : Controller
     {
-       
         public ViewResult Index()
         {
-
             return View(Repository.Boards);
-
         }
+
         public ViewResult Details(string id)
         {
             var board = Repository.GetByBoardCode(id);
@@ -24,24 +21,24 @@ namespace BoardApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ViewResult Create(Board board)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Repository.AddBoard(board);
-                ViewBag.SuccessMessage = "Board successfully created.";
+                ViewBag.SuccessMessage = $"Board {board.BoardCode} was added.";
             }
+
             return View(board);
         }
+
         [HttpGet]
         public ViewResult Edit(string id)
         {
-           
             var board = Repository.GetByBoardCode(id);
-
-            
             return View(board);
         }
 
@@ -49,24 +46,19 @@ namespace BoardApp.Controllers
         [ValidateAntiForgeryToken]
         public ViewResult Edit(Board board)
         {
-            
             if (ModelState.IsValid)
             {
                 Repository.UpdateBoard(board);
-                ViewBag.SuccessMessage = "Board successfully updated.";
+                ViewBag.SuccessMessage = $"Board {board.BoardCode} was updated.";
             }
 
-            
             return View(board);
         }
 
         [HttpGet]
         public ViewResult Delete(string id)
         {
-          
             var board = Repository.GetByBoardCode(id);
-
-          
             return View(board);
         }
 
@@ -74,16 +66,10 @@ namespace BoardApp.Controllers
         [ValidateAntiForgeryToken]
         public ViewResult Delete(Board board)
         {
-           
-            if (board?.BoardCode != null)
-            {
-                Repository.RemoveBoard(board.BoardCode);
-            }
-            ViewBag.SuccessMessage = "Board successfully deleted.";
+            Repository.RemoveBoard(board.BoardCode);
+            ViewBag.SuccessMessage = $"Board {board.BoardCode} was deleted.";
 
-           
             return View(board);
         }
     }
-  
 }
