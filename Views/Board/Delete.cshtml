@@ -48,9 +48,9 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
     </dl>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Make" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+   <form asp-action="Delete">
+    @Html.HiddenFor(model => model.BoardCode)
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
+</form>
 </div>
