@@ -1,19 +1,22 @@
-@model IEnumerable<BoardApp.Models.Board>
+﻿@model IEnumerable<BoardApp.Models.Board>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index";  
 }
 
 <h1>List of Boards</h1>
 
 <p>
-    <a asp-controller="Home" asp-action="AddBoard">Add a new board</a>
+    <a asp-action="Create">Add new Board</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.BoardCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Make)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Model)
@@ -31,21 +34,24 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(model => item.BoardCode)
+                @Html.DisplayFor(modelItem => item.BoardCode)
             </td>
             <td>
-                @Html.DisplayFor(model => item.Model)
+                @Html.DisplayFor(modelItem => item.Make)
             </td>
             <td>
-                @Html.DisplayFor(model => item.FlashKb)
+                @Html.DisplayFor(modelItem => item.Model)
             </td>
             <td>
-                @Html.DisplayFor(model => item.Price)
+                @Html.DisplayFor(modelItem => item.FlashKb)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Make">Edit</a> |
-                <a asp-action="Details" asp-route-boardCode="@item.BoardCode">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Make">Delete</a>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.BoardCode }) |
+                @Html.ActionLink("Details", "Details", new { id = item.BoardCode }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.BoardCode })
             </td>
         </tr>
 }

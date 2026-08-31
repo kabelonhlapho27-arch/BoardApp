@@ -1,13 +1,23 @@
 ﻿@model BoardApp.Models.Board
 
 @{
-    ViewData["Title"] = "Details";   
+    ViewData["Title"] = "Delete";
+    Layout = "_Layout";
 }
 
-<h1>Board Details</h1>
+<h1>Delete</h1>
 
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.SuccessMessage
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Selected Board</h4>
+    <h4>Board</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -41,8 +51,10 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
     </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.BoardCode }) |
-    <a asp-action="Index">Back to List</a>
+    
+    <form asp-action="Delete">
+        @Html.HiddenFor(model => model.BoardCode)
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
 </div>
