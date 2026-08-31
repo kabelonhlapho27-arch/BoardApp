@@ -41,7 +41,7 @@ new Board("1010", "CUTfree", "CV32-BFN-01", 128, 49.00m)
             var board = GetByBoardCode(boardCode);
             if (board != null)
             {
-                Repository.Boards.Remove();
+                boards.Remove(board);
             }
 
         }
