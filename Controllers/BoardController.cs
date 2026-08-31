@@ -6,15 +6,84 @@ namespace BoardApp.Controllers
 {
     public class BoardController : Controller
     {
-        public IActionResult Index()
+       
+        public ViewResult Index()
         {
+
             return View(Repository.Boards);
+
+        }
+        public ViewResult Details(string id)
+        {
+            var board = Repository.GetByBoardCode(id);
+            return View(board);
         }
 
-        public IActionResult Details(string boardCode)
+        [HttpGet]
+        public ViewResult Create()
         {
-            var board = Repository.Boards.FirstOrDefault(b => b.BoardCode == boardCode);
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ViewResult Create(Board board)
+        {
+            if(ModelState.IsValid)
+            {
+                Repository.AddBoard(board);
+                ViewBag.SuccessMessage = "Board successfully created.";
+            }
+            return View(board);
+        }
+        [HttpGet]
+        public ViewResult Edit(string id)
+        {
+           
+            var board = Repository.GetByBoardCode(id);
+
+            
+            return View(board);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ViewResult Edit(Board board)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                Repository.UpdateBoard(board);
+                ViewBag.SuccessMessage = "Board successfully updated.";
+            }
+
+            
+            return View(board);
+        }
+
+        [HttpGet]
+        public ViewResult Delete(string id)
+        {
+          
+            var board = Repository.GetByBoardCode(id);
+
+          
+            return View(board);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ViewResult Delete(Board board)
+        {
+           
+            if (board?.BoardCode != null)
+            {
+                Repository.RemoveBoard(board.BoardCode);
+            }
+            ViewBag.SuccessMessage = "Board successfully deleted.";
+
+           
             return View(board);
         }
     }
+  
 }
