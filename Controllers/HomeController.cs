@@ -1,7 +1,6 @@
-using AspNetCoreGeneratedDocument;
+using System.Diagnostics;
 using BoardApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace BoardApp.Controllers
 {
@@ -22,35 +21,12 @@ namespace BoardApp.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
+        }            
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        [HttpGet]
-        public ViewResult AddBoard()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ViewResult AddBoard(Board board)
-        {
-            if (ModelState.IsValid)
-            {
-                Repository.AddBoard(board);
-                return View("BoardAdded", board);
-            }
-            return View();
-           
-        }
-
-        public ViewResult ListBoards()
-        {
-            return View(Repository.Boards);
         }
     }
 }
